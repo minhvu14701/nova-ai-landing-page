@@ -1,0 +1,123 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-hand: 'Caveat', cursive;
+
+  /* Page backgrounds */
+  --color-ink: #050816;
+  --color-ink-band: #070b1f;
+  --color-ink-footer: #03050d;
+  --color-ink-menu: #090d21;
+  --color-paper: #f4f7fc;
+  /* Headings on light sections */
+  --color-navy: #0f1b4d;
+
+  --shadow-glow-cyan: 0 0 35px -5px rgb(56 189 248 / 0.35);
+  --shadow-glow-purple: 0 0 40px -5px rgb(139 92 246 / 0.35);
+  --shadow-glow-blue: 0 10px 30px -5px rgb(37 99 235 / 0.45);
+  --shadow-glow-violet: 0 12px 35px -6px rgb(124 58 237 / 0.55);
+  --shadow-card: 0 10px 25px -3px rgb(0 0 0 / 0.04), 0 4px 6px -4px rgb(0 0 0 / 0.02);
+  --shadow-laptop: 0 0 0 2px #27272a, 0 25px 50px -12px rgb(0 0 0 / 0.8), 0 0 40px rgb(56 189 248 / 0.2);
+
+  --animate-float: float 5s ease-in-out infinite;
+  --animate-ripple: ripple 0.6s ease-out forwards;
+  --animate-menu-in: menu-in 0.25s ease-out;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-8px) rotate(-0.5deg);
+    }
+  }
+
+  @keyframes ripple {
+    from {
+      transform: scale(0);
+      opacity: 0.45;
+    }
+    to {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Light sheen that sweeps across a button on hover. */
+@utility btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(115deg, transparent 30%, rgb(255 255 255 / 0.35) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.7s ease;
+    pointer-events: none;
+  }
+
+  @media (hover: hover) {
+    &:hover::before {
+      transform: translateX(120%);
+    }
+  }
+}
+
+/* Soft glow that follows the cursor; position comes from --spot-x / --spot-y set in SpotlightCard. */
+@utility spotlight {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(
+      280px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+      var(--spot-color, rgb(56 189 248 / 0.15)),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  @media (hover: hover) {
+    &:hover::before {
+      opacity: 1;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

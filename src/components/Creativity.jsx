@@ -9,7 +9,7 @@ const BENEFITS = ['High-quality output', 'Multiple styles & templates', 'Fast an
 
 export default function Creativity() {
   return (
-    <section id="creativity" className="py-20 lg:py-24 bg-ink text-white relative overflow-hidden scroll-mt-20">
+    <section id="screenshots" className="py-20 lg:py-24 bg-ink text-white relative overflow-hidden scroll-mt-20">
       <div className="absolute -left-40 top-1/2 -translate-y-1/2 w-[640px] h-[640px] rounded-full bg-violet-700/25 blur-[120px] pointer-events-none" />
       <div className="absolute left-1/3 top-0 w-[420px] h-[420px] rounded-full bg-blue-700/20 blur-[110px] pointer-events-none" />
 

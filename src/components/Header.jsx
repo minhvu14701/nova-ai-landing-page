@@ -24,6 +24,9 @@ export default function Header() {
         const section = document.querySelector(link.href)
         if (section && section.getBoundingClientRect().top <= 120) current = link.href
       }
+      // Near the page bottom the last section can't scroll up to the header, so select it explicitly
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
+      if (atBottom) current = NAV_LINKS[NAV_LINKS.length - 1].href
       setActiveHref(current)
     }
     onScroll()

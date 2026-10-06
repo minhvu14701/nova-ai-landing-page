@@ -4,8 +4,8 @@ export const DOWNLOAD_URL = '#download'
 export const NAV_LINKS = [
   { href: '#home', label: 'Home' },
   { href: '#features', label: 'Features' },
-  { href: '#creativity', label: 'Screenshots' },
-  { href: '#audience', label: 'FAQ' },
+  { href: '#screenshots', label: 'Screenshots' },
+  { href: '#faq', label: 'FAQ' },
 ]
 
 export const SOCIAL_LINKS = [

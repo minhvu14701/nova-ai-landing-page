@@ -34,7 +34,7 @@ const AUDIENCES = [
 
 export default function Audience() {
   return (
-    <section id="audience" className="py-20 lg:py-24 bg-paper text-slate-900 scroll-mt-20">
+    <section id="faq" className="py-20 lg:py-24 bg-paper text-slate-900 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-4 space-y-4">

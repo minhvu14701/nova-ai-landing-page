@@ -11,10 +11,21 @@ const UNDERLINE =
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [activeHref, setActiveHref] = useState(NAV_LINKS[0].href)
   const closeMenu = () => setMenuOpen(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10)
+
+      // The active link is the last section whose top has passed below the fixed header
+      let current = NAV_LINKS[0].href
+      for (const link of NAV_LINKS) {
+        const section = document.querySelector(link.href)
+        if (section && section.getBoundingClientRect().top <= 120) current = link.href
+      }
+      setActiveHref(current)
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -37,11 +48,12 @@ export default function Header() {
         </a>
 
         <nav className="hidden md:flex items-center gap-10 text-sm font-medium text-slate-300">
-          {NAV_LINKS.map((link, i) => (
+          {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className={`${UNDERLINE} ${i === 0 ? 'text-white after:scale-x-100' : 'after:scale-x-0'} hover:text-cyan-300 transition-colors`}
+              aria-current={link.href === activeHref ? 'location' : undefined}
+              className={`${UNDERLINE} ${link.href === activeHref ?'text-white after:scale-x-100' : 'after:scale-x-0'} hover:text-cyan-300 transition-colors`}
             >
               {link.label}
             </a>
@@ -74,12 +86,13 @@ export default function Header() {
 
       {menuOpen && (
         <div id="mobile-menu" className="md:hidden px-4 pt-2 pb-6 bg-ink-menu border-b border-white/10 space-y-3 animate-menu-in">
-          {NAV_LINKS.map((link, i) => (
+          {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={closeMenu}
-              className={`block px-3 py-2 rounded-lg text-base font-medium ${i === 0 ? 'text-white' : 'text-slate-300'} hover:bg-white/5 hover:pl-5 active:bg-white/10 transition-all`}
+              aria-current={link.href === activeHref ? 'location' : undefined}
+              className={`block px-3 py-2 rounded-lg text-base font-medium ${link.href === activeHref ?'text-white' : 'text-slate-300'} hover:bg-white/5 hover:pl-5 active:bg-white/10 transition-all`}
             >
               {link.label}
             </a>
